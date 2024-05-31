@@ -1,0 +1,74 @@
+" ========== set <leader> to , ==========
+" Map the leader key to a spacebar.
+let mapleader = "\<space>"
+
+" ========== Shortcutting split navigation ==========
+map <C-h> <C-w>h
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
+
+" ========== Tabs ==========
+nnoremap <C-Right> gt
+nnoremap <C-Left> gT
+nnoremap <silent> <C-t> :tabnew<CR>
+
+" ========== Line number ==========
+:set number
+
+" ========== Dracula Pro Theme ==========
+packadd! dracula_pro
+syntax enable
+let g:dracula_colorterm = 0
+colorscheme dracula_pro
+
+" ========== Plugins ==========
+" Plugins will be downloaded under the specified directory.
+call plug#begin(has('nvim') ? stdpath('data') . '/plugged' : '~/.vim/plugged')
+
+" Declare the list of plugins.
+Plug 'jehuipark/github-co-author-vim-plugin'
+Plug 'preservim/nerdtree'
+
+" fzf, see https://github.com/junegunn/fzf.vim
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+
+" telescope, see https://github.com/nvim-telescope/telescope.nvim
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.1' }
+
+" browser-bookmarks.nvim, see https://github.com/dhruvmanila/browser-bookmarks.nvim
+Plug 'dhruvmanila/browser-bookmarks.nvim', { 'tag': '*' }
+
+" which-key.nvim, https://github.com/folke/which-key.nvim
+Plug 'https://github.com/folke/which-key.nvim.git'
+
+" List ends here. Plugins become visible to Vim after this call.
+call plug#end()
+
+" ========== Vim GitHub Co Author ==========
+" Config for 'jehuipark/github-co-author-vim-plugin', see https://github.com/JeHuiPark/github-co-author-vim-plugin
+let g:github_co_author_list_path = '~/nvim-plugin-config/github-co-author-list'
+
+" ========== NERDTree ==========
+" Start NERDTree when Vim is started without file arguments.
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists('s:std_in') | NERDTree | endif
+
+nnoremap <leader>m :NERDTreeFocus<CR>
+nnoremap <leader>n :NERDTreeToggle<CR>
+
+let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 1
+let NERDTreeShowBookmarks=1
+
+" ========== FZF ==========
+nnoremap <C-f> :Files<CR>
+
+" ========== Telescope ==========
+" Find files using Telescope command-line sugar.
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
