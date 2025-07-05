@@ -20,4 +20,5 @@ Use the `~/.config/aerospace/aerospace.toml` file as source of truth.
 
 ## References
 
+- [AeroSpace repo](https://github.com/nikitabobko/AeroSpace)
 - [YouTube Guide by Josean Martinez](https://www.youtube.com/watch?v=-FoWClVHG5g)
