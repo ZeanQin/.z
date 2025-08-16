@@ -33,3 +33,7 @@ shell-integration-features = true
 
 # macos
 macos-titlebar-style = transparent
+keybind = shift+enter=text:\n
+
+# quick terminal
+keybind = global:ctrl+grave_accent=toggle_quick_terminal
