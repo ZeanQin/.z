@@ -1,3 +1,23 @@
+## Setup on a new machine
+
+```sh
+git clone <this-repo> && cd <repo>/tmux
+./install.sh
+```
+
+`install.sh` is idempotent — it symlinks `~/.tmux.conf` to this folder, installs
+[TPM](https://github.com/tmux-plugins/tpm) + plugins, and reloads. Re-run it any
+time to update plugins.
+
+### Theme
+
+The status bar uses [catppuccin/tmux](https://github.com/catppuccin/tmux) pinned
+to a version (`v2.3.0`) with the light **Latte** flavour. To change theme, edit
+the `@plugin` / `@catppuccin_flavor` lines in `.tmux.conf`, then re-run
+`./install.sh`. After editing config in a running session, reload with
+`prefix + r`. Manage plugins from inside tmux with `prefix + I` (install),
+`prefix + U` (update), `prefix + alt + u` (clean).
+
 ## Sessions
 
 - `tmux new-session -A -s default` - start a new session or attach to an existing session named `default`
