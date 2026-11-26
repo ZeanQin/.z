@@ -30,5 +30,50 @@
 
 - `ctrl + space` `ctrl + space` - send `ctrl + space` to the program
 
+## Processes
+
+```mermaid
+graph TD
+    user([🧑 You - keyboard and mouse])
+    you_shell([⌨️ You - typing commands])
+    script([📜 Scripts - automate Rex])
+    agent([🤖 AI agents - Claude Code])
+
+    app[Rex.app]
+    cli[rex CLI]
+    server[rex server]
+    shell[shell in each pane]
+
+    user --> app
+    you_shell --> cli
+    script --> cli
+    agent --> cli
+
+    app <-->|socket| server
+    cli -->|socket| server
+    server -->|starts and runs| shell
+
+    classDef consumer fill:#fde68a,stroke:#b45309,stroke-width:2px,color:#000
+    classDef process fill:#bfdbfe,stroke:#1d4ed8,stroke-width:2px,color:#000
+    class user,you_shell,script,agent consumer
+    class app,cli,server,shell process
+```
+
+Yellow rounded boxes are consumers, blue square boxes are processes.
+
+| Consumer | Uses | Example |
+|---|---|---|
+| You | `Rex.app` | Typing in panes, `ctrl + space` keys, Settings |
+| You | `rex` CLI | `rex config reload`, `rex keymap` |
+| Scripts | `rex` CLI | Open a session with editor, server and test panes |
+| AI agents | `rex` CLI | Claude Code reloading config, running a build in a new pane (see the `rex` skill) |
+
+| Process | What it does |
+|---|---|
+| `Rex.app` | The window you see. Draws the terminal, takes your keystrokes, sends them to the server. |
+| `rex server` | Runs in the background. Owns sessions, tabs and panes, reads `init.lua`. Keeps running after the app quits, like tmux. |
+| shell in each pane | Your `zsh` (or any program) in a pane. Started by the server, so it survives the app closing. |
+| `rex` CLI | Short-lived command, e.g. `rex config reload`. Asks the server to do something, then exits. |
+
 ## References
 - https://www.superlogical.com/rex/docs/llms.txt
